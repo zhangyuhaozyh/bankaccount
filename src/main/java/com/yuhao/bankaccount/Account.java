@@ -1,6 +1,7 @@
 package com.yuhao.bankaccount;
 
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,11 +35,12 @@ public class Account {
 		this.statements = statements;
 	}
 
-	public void deposit(BigDecimal bigDecimal) {
-		// TODO Auto-generated method stub
+	public void deposit(BigDecimal amount) {
+		this.setBalance(this.getBalance().add(amount));
+		this.getStatements().add(new Statement(ZonedDateTime.now(), amount, this.getBalance()));
 	}
 
-	public void withdrawal(BigDecimal bigDecimal) {
+	public void withdrawal(BigDecimal amount) {
 		// TODO Auto-generated method stub
 	}
 

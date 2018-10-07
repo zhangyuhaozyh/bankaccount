@@ -8,6 +8,17 @@ public class Statement {
 	private BigDecimal amount;
 	private BigDecimal balance;
 
+	public Statement() {
+		super();
+	}
+
+	public Statement(ZonedDateTime date, BigDecimal amount, BigDecimal balance) {
+		super();
+		this.date = date;
+		this.amount = amount;
+		this.balance = balance;
+	}
+
 	public ZonedDateTime getDate() {
 		return date;
 	}
