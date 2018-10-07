@@ -12,7 +12,6 @@ public class Account {
 	private List<Statement> statements = new ArrayList<>();
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-
 	public Account() {
 		super();
 	}
@@ -54,7 +53,7 @@ public class Account {
 		this.getStatements().add(new Statement("withdrawal", ZonedDateTime.now(), amount, this.getBalance()));
 	}
 
-	public void checkOperations() {
+	public void statementPrinting() {
 		List<String> operations = new ArrayList<>();
 		operations.add(String.join(" | ", "Operation ", "Date               ", "Amount", "Balance"));
 		this.statements.forEach(s -> {

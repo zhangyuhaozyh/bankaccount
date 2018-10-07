@@ -25,18 +25,12 @@ public class BankAccountTest {
 		System.setOut(new PrintStream(outContent));
 	}
 
-	/**
-	 * US 1 : deposit some money
-	 */
 	@Test
 	public void depositTest() {
 		account.deposit(new BigDecimal("100.00"));
 		assertEquals(new BigDecimal("100.00"), account.getBalance());
 	}
 
-	/**
-	 * US 2 : retrieve some money
-	 */
 	@Test
 	public void withdrawalTest() {
 		account = new Account(new BigDecimal("99.00"));
@@ -44,9 +38,6 @@ public class BankAccountTest {
 		assertEquals(new BigDecimal("49.00"), account.getBalance());
 	}
 
-	/**
-	 * US 2 : retrieve all money
-	 */
 	@Test
 	public void withdrawalAllTest() {
 		account = new Account(new BigDecimal("99.00"));
@@ -54,11 +45,8 @@ public class BankAccountTest {
 		assertEquals(new BigDecimal("0.00"), account.getBalance());
 	}
 
-	/**
-	 * US 3 : check my operations
-	 */
 	@Test
-	public void checkOperationsTest() {
+	public void statementPrintingTest() {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
 				.withZone(ZoneId.systemDefault());
 		account.getStatements().add(new Statement("Deposit   ", ZonedDateTime.parse("2018-10-08 00:00:00", formatter),
@@ -67,7 +55,7 @@ public class BankAccountTest {
 				new BigDecimal("50.00"), new BigDecimal("50.00")));
 		account.getStatements().add(new Statement("withdrawal", ZonedDateTime.parse("2018-10-08 00:02:00", formatter),
 				new BigDecimal("50.00"), new BigDecimal("0.00")));
-		account.checkOperations();
+		account.statementPrinting();
 		assertEquals("Operation  | Date                | Amount | Balance\r\n"
 				+ "Deposit    | 2018-10-08 00:00:00 | 100.00 | 100.00\r\n"
 				+ "withdrawal | 2018-10-08 00:01:00 | 50.00 | 50.00\r\n"
