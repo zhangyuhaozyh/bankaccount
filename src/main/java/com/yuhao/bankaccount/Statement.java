@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 
 public class Statement {
+	private String operation;
 	private ZonedDateTime date;
 	private BigDecimal amount;
 	private BigDecimal balance;
@@ -12,11 +13,20 @@ public class Statement {
 		super();
 	}
 
-	public Statement(ZonedDateTime date, BigDecimal amount, BigDecimal balance) {
+	public Statement(String operation, ZonedDateTime date, BigDecimal amount, BigDecimal balance) {
 		super();
+		this.operation = operation;
 		this.date = date;
 		this.amount = amount;
 		this.balance = balance;
+	}
+
+	public String getOperation() {
+		return operation;
+	}
+
+	public void setOperation(String operation) {
+		this.operation = operation;
 	}
 
 	public ZonedDateTime getDate() {
