@@ -27,8 +27,9 @@ public class BankAccountTest {
 	 */
 	@Test
 	public void withdrawalTest() {
+		account = new Account(new BigDecimal("99.00"));
 		account.withdrawal(new BigDecimal("50.00"));
-		assertEquals(new BigDecimal("50.00"), account.getBalance());
+		assertEquals(new BigDecimal("49.00"), account.getBalance());
 	}
 
 	/**
