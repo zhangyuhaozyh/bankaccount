@@ -46,7 +46,9 @@ public class Account {
 	}
 
 	public void withdrawalAll() {
-		// TODO Auto-generated method stub
+		BigDecimal amount = this.getBalance();
+		this.setBalance(this.getBalance().subtract(this.getBalance()));
+		this.getStatements().add(new Statement(ZonedDateTime.now(), amount, this.getBalance()));
 	}
 
 	public void checkOperations() {
