@@ -37,12 +37,7 @@ public class PrintServiceTest {
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(ZoneId.systemDefault());
 
 	@Before
-	public void setUpStreams() {
-		System.setOut(new PrintStream(outContent));
-	}
-
-	@Test
-	public void statementPrintingTest() {
+	public void setUp() {
 		List<Statement> statements = new ArrayList<>();
 		statements.add(new Statement("Deposit   ", ZonedDateTime.parse("2018-10-08 00:00:00", formatter),
 				new BigDecimal("100.00"), new BigDecimal("100.00")));
@@ -51,10 +46,20 @@ public class PrintServiceTest {
 		statements.add(new Statement("withdrawal", ZonedDateTime.parse("2018-10-08 00:02:00", formatter),
 				new BigDecimal("50.00"), new BigDecimal("0.00")));
 		Mockito.when(account.getStatements()).thenReturn(statements);
+		setUpStreams();
+	}
+
+	@Test
+	public void statementPrintingTest() {
 		printService.statementPrinting(account.getStatements());
 		assertEquals("Operation  | Date                | Amount | Balance\r\n"
 				+ "Deposit    | 2018-10-08 00:00:00 | 100.00 | 100.00\r\n"
 				+ "withdrawal | 2018-10-08 00:01:00 | 50.00 | 50.00\r\n"
 				+ "withdrawal | 2018-10-08 00:02:00 | 50.00 | 0.00\r\n", outContent.toString());
 	}
+
+	private void setUpStreams() {
+		System.setOut(new PrintStream(outContent));
+	}
+	
 }
