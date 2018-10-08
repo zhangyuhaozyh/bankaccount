@@ -2,7 +2,6 @@ package com.yuhao.bankaccount.domain;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
