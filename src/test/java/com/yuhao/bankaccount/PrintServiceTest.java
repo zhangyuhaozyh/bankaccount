@@ -34,6 +34,7 @@ public class PrintServiceTest {
 	private PrintService printService = new PrintService();
 
 	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+	private final String NOTRANSACTIONPRINT = "You have no transaction history.\r\n";
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(ZoneId.systemDefault());
 
 	@Before
@@ -58,8 +59,16 @@ public class PrintServiceTest {
 				+ "withdrawal | 2018-10-08 00:02:00 | 50.00 | 0.00\r\n", outContent.toString());
 	}
 
+	@Test
+	public void whenNoStatement_thenNoStatementPrintingTest() {
+		List<Statement> noStatements = new ArrayList<>();
+		Mockito.when(account.getStatements()).thenReturn(noStatements);
+		printService.statementPrinting(account.getStatements());
+		assertEquals(NOTRANSACTIONPRINT, outContent.toString());
+	}
+
 	private void setUpStreams() {
 		System.setOut(new PrintStream(outContent));
 	}
-	
+
 }
