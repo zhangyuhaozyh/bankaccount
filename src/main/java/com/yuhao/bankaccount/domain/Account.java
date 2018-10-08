@@ -7,6 +7,8 @@ import java.util.List;
 
 public class Account {
 
+	private static final String WITHDRAWAL = "withdrawal";
+	private static final String DEPOSIT = "Deposit   ";
 	private BigDecimal balance;
 	private List<Statement> statements = new ArrayList<>();
 
@@ -37,18 +39,18 @@ public class Account {
 
 	public void deposit(BigDecimal amount) {
 		this.setBalance(this.getBalance().add(amount));
-		this.getStatements().add(new Statement("Deposit   ", ZonedDateTime.now(), amount, this.getBalance()));
+		this.getStatements().add(new Statement(DEPOSIT, ZonedDateTime.now(), amount, this.getBalance()));
 	}
 
 	public void withdrawal(BigDecimal amount) {
 		this.setBalance(this.getBalance().subtract(amount));
-		this.getStatements().add(new Statement("withdrawal", ZonedDateTime.now(), amount, this.getBalance()));
+		this.getStatements().add(new Statement(WITHDRAWAL, ZonedDateTime.now(), amount, this.getBalance()));
 	}
 
 	public void withdrawalAll() {
 		BigDecimal amount = this.getBalance();
 		this.setBalance(this.getBalance().subtract(this.getBalance()));
-		this.getStatements().add(new Statement("withdrawal", ZonedDateTime.now(), amount, this.getBalance()));
+		this.getStatements().add(new Statement(WITHDRAWAL, ZonedDateTime.now(), amount, this.getBalance()));
 	}
 
 }
