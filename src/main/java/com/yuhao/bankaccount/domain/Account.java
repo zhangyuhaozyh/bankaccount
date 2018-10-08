@@ -1,4 +1,4 @@
-package com.yuhao.bankaccount;
+package com.yuhao.bankaccount.domain;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
@@ -10,7 +10,6 @@ public class Account {
 
 	private BigDecimal balance;
 	private List<Statement> statements = new ArrayList<>();
-	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 	public Account() {
 		super();
@@ -51,16 +50,6 @@ public class Account {
 		BigDecimal amount = this.getBalance();
 		this.setBalance(this.getBalance().subtract(this.getBalance()));
 		this.getStatements().add(new Statement("withdrawal", ZonedDateTime.now(), amount, this.getBalance()));
-	}
-
-	public void statementPrinting() {
-		List<String> operations = new ArrayList<>();
-		operations.add(String.join(" | ", "Operation ", "Date               ", "Amount", "Balance"));
-		this.statements.forEach(s -> {
-			operations.add(String.join(" | ", s.getOperation(), s.getDate().format(formatter), s.getAmount().toString(),
-					s.getBalance().toString()));
-		});
-		operations.forEach(System.out::println);
 	}
 
 }

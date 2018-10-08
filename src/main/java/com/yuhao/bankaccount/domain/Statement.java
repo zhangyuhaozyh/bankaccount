@@ -1,4 +1,4 @@
-package com.yuhao.bankaccount;
+package com.yuhao.bankaccount.domain;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
